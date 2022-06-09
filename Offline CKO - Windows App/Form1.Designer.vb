@@ -22,9 +22,17 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
+        Me.StatusDate = New System.Windows.Forms.ToolStripStatusLabel()
+        Me.StatusText = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.lblPrinters = New System.Windows.Forms.Label()
+        Me.cboInstalledPrinters = New System.Windows.Forms.ComboBox()
+        Me.chk_strict_barcode = New System.Windows.Forms.CheckBox()
+        Me.chk_Print_Receipt = New System.Windows.Forms.CheckBox()
         Me.dgv = New System.Windows.Forms.DataGridView()
         Me.patron_bc = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.item_bc = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -33,6 +41,7 @@ Partial Class Form1
         Me.CKO_Time = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.btn_Save_Transactions = New System.Windows.Forms.Button()
         Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.rdo_CustomDate = New System.Windows.Forms.RadioButton()
         Me.rdo1Year = New System.Windows.Forms.RadioButton()
         Me.rdo42days = New System.Windows.Forms.RadioButton()
         Me.rdo21days = New System.Windows.Forms.RadioButton()
@@ -50,30 +59,36 @@ Partial Class Form1
         Me.lbl_item_barcode = New System.Windows.Forms.Label()
         Me.lbl_patron_barcode = New System.Windows.Forms.Label()
         Me.txt_Patron_barcode = New System.Windows.Forms.TextBox()
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
-        Me.lblPrinters = New System.Windows.Forms.Label()
-        Me.cboInstalledPrinters = New System.Windows.Forms.ComboBox()
-        Me.chk_strict_barcode = New System.Windows.Forms.CheckBox()
-        Me.chk_Print_Receipt = New System.Windows.Forms.CheckBox()
-        Me.StatusText = New System.Windows.Forms.ToolStripStatusLabel()
         Me.StatusStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
         Me.grpDueDate.SuspendLayout()
         Me.grpEntry.SuspendLayout()
-        Me.GroupBox2.SuspendLayout()
         Me.SuspendLayout()
         '
         'StatusStrip1
         '
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(24, 24)
-        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusText})
+        Me.StatusStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.StatusDate, Me.StatusText})
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 933)
         Me.StatusStrip1.Name = "StatusStrip1"
         Me.StatusStrip1.Size = New System.Drawing.Size(1214, 22)
         Me.StatusStrip1.TabIndex = 0
         Me.StatusStrip1.Text = "StatusStrip1"
+        '
+        'StatusDate
+        '
+        Me.StatusDate.BorderSides = System.Windows.Forms.ToolStripStatusLabelBorderSides.Right
+        Me.StatusDate.BorderStyle = System.Windows.Forms.Border3DStyle.Bump
+        Me.StatusDate.Name = "StatusDate"
+        Me.StatusDate.Size = New System.Drawing.Size(4, 15)
+        '
+        'StatusText
+        '
+        Me.StatusText.Name = "StatusText"
+        Me.StatusText.Size = New System.Drawing.Size(0, 15)
         '
         'TableLayoutPanel1
         '
@@ -98,6 +113,65 @@ Partial Class Form1
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(1214, 933)
         Me.TableLayoutPanel1.TabIndex = 1
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.lblPrinters)
+        Me.GroupBox2.Controls.Add(Me.cboInstalledPrinters)
+        Me.GroupBox2.Controls.Add(Me.chk_strict_barcode)
+        Me.GroupBox2.Controls.Add(Me.chk_Print_Receipt)
+        Me.GroupBox2.Location = New System.Drawing.Point(3, 703)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(616, 216)
+        Me.GroupBox2.TabIndex = 20
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Settings"
+        '
+        'lblPrinters
+        '
+        Me.lblPrinters.AutoSize = True
+        Me.lblPrinters.Location = New System.Drawing.Point(12, 107)
+        Me.lblPrinters.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
+        Me.lblPrinters.Name = "lblPrinters"
+        Me.lblPrinters.Size = New System.Drawing.Size(118, 20)
+        Me.lblPrinters.TabIndex = 17
+        Me.lblPrinters.Text = "Receipt Printer:"
+        Me.lblPrinters.Visible = False
+        '
+        'cboInstalledPrinters
+        '
+        Me.cboInstalledPrinters.FormattingEnabled = True
+        Me.cboInstalledPrinters.Location = New System.Drawing.Point(12, 131)
+        Me.cboInstalledPrinters.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.cboInstalledPrinters.Name = "cboInstalledPrinters"
+        Me.cboInstalledPrinters.Size = New System.Drawing.Size(366, 28)
+        Me.cboInstalledPrinters.TabIndex = 16
+        Me.cboInstalledPrinters.TabStop = False
+        Me.cboInstalledPrinters.Visible = False
+        '
+        'chk_strict_barcode
+        '
+        Me.chk_strict_barcode.AutoSize = True
+        Me.chk_strict_barcode.Location = New System.Drawing.Point(16, 41)
+        Me.chk_strict_barcode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.chk_strict_barcode.Name = "chk_strict_barcode"
+        Me.chk_strict_barcode.Size = New System.Drawing.Size(145, 24)
+        Me.chk_strict_barcode.TabIndex = 11
+        Me.chk_strict_barcode.TabStop = False
+        Me.chk_strict_barcode.Text = "Strict Barcode?"
+        Me.chk_strict_barcode.UseVisualStyleBackColor = True
+        '
+        'chk_Print_Receipt
+        '
+        Me.chk_Print_Receipt.AutoSize = True
+        Me.chk_Print_Receipt.Location = New System.Drawing.Point(243, 41)
+        Me.chk_Print_Receipt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.chk_Print_Receipt.Name = "chk_Print_Receipt"
+        Me.chk_Print_Receipt.Size = New System.Drawing.Size(135, 24)
+        Me.chk_Print_Receipt.TabIndex = 12
+        Me.chk_Print_Receipt.TabStop = False
+        Me.chk_Print_Receipt.Text = "Print Receipt?"
+        Me.chk_Print_Receipt.UseVisualStyleBackColor = True
+        '
         'dgv
         '
         Me.dgv.AllowUserToAddRows = False
@@ -107,14 +181,14 @@ Partial Class Form1
         Me.dgv.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill
         Me.dgv.ColumnHeadersHeight = 34
         Me.dgv.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.patron_bc, Me.item_bc, Me.due_date, Me.timestamp, Me.CKO_Time})
-        DataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle2.Font = New System.Drawing.Font("Segoe UI", 10.0!)
-        DataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText
-        DataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight
-        DataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.dgv.DefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Segoe UI", 10.0!)
+        DataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.ControlText
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.dgv.DefaultCellStyle = DataGridViewCellStyle1
         Me.dgv.Location = New System.Drawing.Point(632, 5)
         Me.dgv.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.dgv.Name = "dgv"
@@ -181,6 +255,7 @@ Partial Class Form1
             Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.GroupBox1.AutoSize = True
+        Me.GroupBox1.Controls.Add(Me.rdo_CustomDate)
         Me.GroupBox1.Controls.Add(Me.rdo1Year)
         Me.GroupBox1.Controls.Add(Me.rdo42days)
         Me.GroupBox1.Controls.Add(Me.rdo21days)
@@ -196,6 +271,21 @@ Partial Class Form1
         Me.GroupBox1.TabIndex = 12
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Due Date Periods:"
+        '
+        'rdo_CustomDate
+        '
+        Me.rdo_CustomDate.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.rdo_CustomDate.AutoSize = True
+        Me.rdo_CustomDate.Location = New System.Drawing.Point(375, 102)
+        Me.rdo_CustomDate.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.rdo_CustomDate.Name = "rdo_CustomDate"
+        Me.rdo_CustomDate.Size = New System.Drawing.Size(128, 24)
+        Me.rdo_CustomDate.TabIndex = 7
+        Me.rdo_CustomDate.TabStop = True
+        Me.rdo_CustomDate.Text = "Custom Date"
+        Me.rdo_CustomDate.UseVisualStyleBackColor = True
         '
         'rdo1Year
         '
@@ -432,70 +522,6 @@ Partial Class Form1
         Me.txt_Patron_barcode.Size = New System.Drawing.Size(312, 37)
         Me.txt_Patron_barcode.TabIndex = 18
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.lblPrinters)
-        Me.GroupBox2.Controls.Add(Me.cboInstalledPrinters)
-        Me.GroupBox2.Controls.Add(Me.chk_strict_barcode)
-        Me.GroupBox2.Controls.Add(Me.chk_Print_Receipt)
-        Me.GroupBox2.Location = New System.Drawing.Point(3, 703)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(616, 216)
-        Me.GroupBox2.TabIndex = 20
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Settings"
-        '
-        'lblPrinters
-        '
-        Me.lblPrinters.AutoSize = True
-        Me.lblPrinters.Location = New System.Drawing.Point(12, 107)
-        Me.lblPrinters.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
-        Me.lblPrinters.Name = "lblPrinters"
-        Me.lblPrinters.Size = New System.Drawing.Size(118, 20)
-        Me.lblPrinters.TabIndex = 17
-        Me.lblPrinters.Text = "Receipt Printer:"
-        Me.lblPrinters.Visible = False
-        '
-        'cboInstalledPrinters
-        '
-        Me.cboInstalledPrinters.FormattingEnabled = True
-        Me.cboInstalledPrinters.Location = New System.Drawing.Point(12, 131)
-        Me.cboInstalledPrinters.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.cboInstalledPrinters.Name = "cboInstalledPrinters"
-        Me.cboInstalledPrinters.Size = New System.Drawing.Size(366, 28)
-        Me.cboInstalledPrinters.TabIndex = 16
-        Me.cboInstalledPrinters.TabStop = False
-        Me.cboInstalledPrinters.Visible = False
-        '
-        'chk_strict_barcode
-        '
-        Me.chk_strict_barcode.AutoSize = True
-        Me.chk_strict_barcode.Location = New System.Drawing.Point(16, 41)
-        Me.chk_strict_barcode.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.chk_strict_barcode.Name = "chk_strict_barcode"
-        Me.chk_strict_barcode.Size = New System.Drawing.Size(145, 24)
-        Me.chk_strict_barcode.TabIndex = 11
-        Me.chk_strict_barcode.TabStop = False
-        Me.chk_strict_barcode.Text = "Strict Barcode?"
-        Me.chk_strict_barcode.UseVisualStyleBackColor = True
-        '
-        'chk_Print_Receipt
-        '
-        Me.chk_Print_Receipt.AutoSize = True
-        Me.chk_Print_Receipt.Location = New System.Drawing.Point(243, 41)
-        Me.chk_Print_Receipt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
-        Me.chk_Print_Receipt.Name = "chk_Print_Receipt"
-        Me.chk_Print_Receipt.Size = New System.Drawing.Size(135, 24)
-        Me.chk_Print_Receipt.TabIndex = 12
-        Me.chk_Print_Receipt.TabStop = False
-        Me.chk_Print_Receipt.Text = "Print Receipt?"
-        Me.chk_Print_Receipt.UseVisualStyleBackColor = True
-        '
-        'StatusText
-        '
-        Me.StatusText.Name = "StatusText"
-        Me.StatusText.Size = New System.Drawing.Size(0, 15)
-        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
@@ -503,12 +529,15 @@ Partial Class Form1
         Me.ClientSize = New System.Drawing.Size(1214, 955)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.Controls.Add(Me.StatusStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "Form1"
-        Me.Text = "Form1"
+        Me.Text = "Offline Checkout"
         Me.StatusStrip1.ResumeLayout(False)
         Me.StatusStrip1.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.TableLayoutPanel1.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         CType(Me.dgv, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -516,8 +545,6 @@ Partial Class Form1
         Me.grpDueDate.PerformLayout()
         Me.grpEntry.ResumeLayout(False)
         Me.grpEntry.PerformLayout()
-        Me.GroupBox2.ResumeLayout(False)
-        Me.GroupBox2.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -556,4 +583,6 @@ Partial Class Form1
     Friend WithEvents cboInstalledPrinters As ComboBox
     Friend WithEvents chk_strict_barcode As CheckBox
     Friend WithEvents chk_Print_Receipt As CheckBox
+    Friend WithEvents rdo_CustomDate As RadioButton
+    Friend WithEvents StatusDate As ToolStripStatusLabel
 End Class
