@@ -22,6 +22,7 @@ Partial Class Form1
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
         Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
@@ -29,6 +30,7 @@ Partial Class Form1
         Me.StatusText = New System.Windows.Forms.ToolStripStatusLabel()
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
         Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.chk_Print_Staff_Receipt = New System.Windows.Forms.CheckBox()
         Me.lblPrinters = New System.Windows.Forms.Label()
         Me.cboInstalledPrinters = New System.Windows.Forms.ComboBox()
         Me.chk_strict_barcode = New System.Windows.Forms.CheckBox()
@@ -59,6 +61,10 @@ Partial Class Form1
         Me.lbl_item_barcode = New System.Windows.Forms.Label()
         Me.lbl_patron_barcode = New System.Windows.Forms.Label()
         Me.txt_Patron_barcode = New System.Windows.Forms.TextBox()
+        Me.ToolTip_Strict_Barcode = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip_Print_Receipt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip_Print_Staff_Receipt = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ToolTip_No_Card = New System.Windows.Forms.ToolTip(Me.components)
         Me.StatusStrip1.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -115,6 +121,7 @@ Partial Class Form1
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.chk_Print_Staff_Receipt)
         Me.GroupBox2.Controls.Add(Me.lblPrinters)
         Me.GroupBox2.Controls.Add(Me.cboInstalledPrinters)
         Me.GroupBox2.Controls.Add(Me.chk_strict_barcode)
@@ -125,6 +132,18 @@ Partial Class Form1
         Me.GroupBox2.TabIndex = 20
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Settings"
+        '
+        'chk_Print_Staff_Receipt
+        '
+        Me.chk_Print_Staff_Receipt.AutoSize = True
+        Me.chk_Print_Staff_Receipt.Location = New System.Drawing.Point(243, 75)
+        Me.chk_Print_Staff_Receipt.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
+        Me.chk_Print_Staff_Receipt.Name = "chk_Print_Staff_Receipt"
+        Me.chk_Print_Staff_Receipt.Size = New System.Drawing.Size(174, 24)
+        Me.chk_Print_Staff_Receipt.TabIndex = 18
+        Me.chk_Print_Staff_Receipt.TabStop = False
+        Me.chk_Print_Staff_Receipt.Text = "Print Staff Receipt?"
+        Me.chk_Print_Staff_Receipt.UseVisualStyleBackColor = True
         '
         'lblPrinters
         '
@@ -461,6 +480,8 @@ Partial Class Form1
         Me.btnNoCard.Size = New System.Drawing.Size(135, 57)
         Me.btnNoCard.TabIndex = 23
         Me.btnNoCard.Text = "No Card?"
+        Me.ToolTip_No_Card.SetToolTip(Me.btnNoCard, "If the patron does not have their card, press here to record patron details for l" &
+        "ater entry")
         Me.btnNoCard.UseVisualStyleBackColor = True
         '
         'btn_Checkout
@@ -521,6 +542,23 @@ Partial Class Form1
         Me.txt_Patron_barcode.Name = "txt_Patron_barcode"
         Me.txt_Patron_barcode.Size = New System.Drawing.Size(312, 37)
         Me.txt_Patron_barcode.TabIndex = 18
+        '
+        'ToolTip_Strict_Barcode
+        '
+        Me.ToolTip_Strict_Barcode.IsBalloon = True
+        Me.ToolTip_Strict_Barcode.ToolTipTitle = "Strict Barcode"
+        '
+        'ToolTip_Print_Receipt
+        '
+        Me.ToolTip_Print_Receipt.IsBalloon = True
+        '
+        'ToolTip_Print_Staff_Receipt
+        '
+        Me.ToolTip_Print_Staff_Receipt.IsBalloon = True
+        '
+        'ToolTip_No_Card
+        '
+        Me.ToolTip_No_Card.IsBalloon = True
         '
         'Form1
         '
@@ -585,4 +623,9 @@ Partial Class Form1
     Friend WithEvents chk_Print_Receipt As CheckBox
     Friend WithEvents rdo_CustomDate As RadioButton
     Friend WithEvents StatusDate As ToolStripStatusLabel
+    Friend WithEvents chk_Print_Staff_Receipt As CheckBox
+    Friend WithEvents ToolTip_Strict_Barcode As ToolTip
+    Friend WithEvents ToolTip_Print_Receipt As ToolTip
+    Friend WithEvents ToolTip_Print_Staff_Receipt As ToolTip
+    Friend WithEvents ToolTip_No_Card As ToolTip
 End Class

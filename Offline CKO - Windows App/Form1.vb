@@ -10,6 +10,8 @@ Public Class Form1
         DatePicker.MinDate = DateTime.Now
         DatePicker.MaxDate = DateAdd("yyyy", 2, DateTime.Today)
         chk_Print_Receipt.Checked = My.Settings.Print_Receipt
+        chk_Print_Staff_Receipt.Checked = My.Settings.Print_Staff_Receipt
+
         chk_strict_barcode.Checked = My.Settings.Strict_Barcode
         cboInstalledPrinters.Text = My.Settings.PrinterToUse
         PrinterToUse = My.Settings.PrinterToUse
@@ -34,7 +36,9 @@ Public Class Form1
         rdo28days.Checked = True
         StatusDate.Text = "Today: " & Date.Now.ToShortDateString
 
-
+        ToolTip_Strict_Barcode.SetToolTip(chk_strict_barcode, "If checked, this will warn if entered barcodes don't match a predefined formula. Not typically used at KCLS")
+        ToolTip_Print_Receipt.SetToolTip(chk_Print_Receipt, "If checked, will print the Patron Receipt")
+        ToolTip_Print_Staff_Receipt.SetToolTip(chk_Print_Staff_Receipt, "If checked, will print the staff receipt with scannable barcodes for 'No Card' patron entry later")
 
     End Sub
 
@@ -428,10 +432,10 @@ Public Class Form1
         If chk_Print_Receipt.Checked And PrinterToUse <> "None" Then
             Dim pd As New PrintDoc()
             pd.PrinterSettings.PrinterName = PrinterToUse
-
+            pd.PrintController = New StandardPrintController
             pd.Print()
         End If
-        If NoCard = True And InStr(UCase(PrinterToUse), "EPSON") >= 1 And chk_Print_Receipt.Checked Then
+        If NoCard = True And InStr(UCase(PrinterToUse), "EPSON") >= 1 And chk_Print_Staff_Receipt.Checked Then
             EPOSPrinter(PatronName & vbCrLf)
             EPOSPrinter(PatronDOB & vbCrLf)
             EPOSPrinter(PatronPhone & vbCrLf)
@@ -515,6 +519,25 @@ Public Class Form1
 
 
 
+    End Sub
+
+    Private Sub chk_Print_Staff_Receipt_CheckedChanged(sender As Object, e As EventArgs) Handles chk_Print_Staff_Receipt.CheckedChanged
+        My.Settings.Print_Staff_Receipt = chk_Print_Staff_Receipt.Checked
+        My.Settings.Save()
+        If chk_Print_Staff_Receipt.Checked = True Then
+            lblPrinters.Visible = True
+            cboInstalledPrinters.Visible = True
+        Else
+            cboInstalledPrinters.Visible = False
+            lblPrinters.Visible = False
+
+        End If
+
+    End Sub
+
+    Private Sub chk_Print_Staff_Receipt_Click(sender As Object, e As EventArgs) Handles chk_Print_Staff_Receipt.Click
+        My.Settings.Print_Staff_Receipt = chk_Print_Staff_Receipt.Checked
+        My.Settings.Save()
     End Sub
 End Class
 Public Class PrintDoc
