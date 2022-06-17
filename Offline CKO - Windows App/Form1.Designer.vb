@@ -104,10 +104,10 @@ Partial Class Form1
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 48.27018!))
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox2, 0, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.dgv, 1, 0)
-        Me.TableLayoutPanel1.Controls.Add(Me.btn_Save_Transactions, 1, 3)
         Me.TableLayoutPanel1.Controls.Add(Me.GroupBox1, 0, 1)
         Me.TableLayoutPanel1.Controls.Add(Me.grpDueDate, 0, 0)
         Me.TableLayoutPanel1.Controls.Add(Me.grpEntry, 0, 2)
+        Me.TableLayoutPanel1.Controls.Add(Me.btn_Save_Transactions, 1, 3)
         Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
@@ -254,16 +254,14 @@ Partial Class Form1
         '
         'btn_Save_Transactions
         '
-        Me.btn_Save_Transactions.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
+        Me.btn_Save_Transactions.Anchor = System.Windows.Forms.AnchorStyles.None
         Me.btn_Save_Transactions.AutoSize = True
         Me.btn_Save_Transactions.Enabled = False
-        Me.btn_Save_Transactions.Font = New System.Drawing.Font("Segoe UI", 12.0!)
-        Me.btn_Save_Transactions.Location = New System.Drawing.Point(632, 705)
+        Me.btn_Save_Transactions.Font = New System.Drawing.Font("Segoe UI", 14.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_Save_Transactions.Location = New System.Drawing.Point(648, 747)
         Me.btn_Save_Transactions.Margin = New System.Windows.Forms.Padding(4, 5, 4, 5)
         Me.btn_Save_Transactions.Name = "btn_Save_Transactions"
-        Me.btn_Save_Transactions.Size = New System.Drawing.Size(578, 223)
+        Me.btn_Save_Transactions.Size = New System.Drawing.Size(546, 139)
         Me.btn_Save_Transactions.TabIndex = 11
         Me.btn_Save_Transactions.Text = "Finish this Checkout"
         Me.btn_Save_Transactions.UseVisualStyleBackColor = True

@@ -40,6 +40,7 @@ Public Class Form1
         ToolTip_Print_Receipt.SetToolTip(chk_Print_Receipt, "If checked, will print the Patron Receipt")
         ToolTip_Print_Staff_Receipt.SetToolTip(chk_Print_Staff_Receipt, "If checked, will print the staff receipt with scannable barcodes for 'No Card' patron entry later")
 
+
     End Sub
 
     Private Sub DatePicker_ValueChanged(sender As Object, e As EventArgs) Handles DatePicker.ValueChanged
@@ -349,87 +350,92 @@ Public Class Form1
         Dim line As String = ""
         'MsgBox(DateTime.Now.ToString("MMM-dd-yyyy"))
         If NoCard = False Then
+
             FilePath = My.Computer.FileSystem.SpecialDirectories.Desktop & "\OFFLINE_TO_PROCESS_" & DateTime.Now.ToString("MMM-dd-yyyy") & ".txt"
 
-            Dim file As System.IO.StreamWriter
-            file = My.Computer.FileSystem.OpenTextFileWriter(FilePath, True)
+
+                Dim file As System.IO.StreamWriter
+                file = My.Computer.FileSystem.OpenTextFileWriter(FilePath, True)
 
 
-            For i = 0 To dgv.RowCount - 1
+                For i = 0 To dgv.RowCount - 1
 
-                '  MsgBox(Form1.dgv.Rows(i).Cells(1).Value.ToString)
-                line = "{" & Chr(34) & "timestamp" & Chr(34) & ":" & dgv.Rows(i).Cells(3).Value.ToString & ","
-                line = line & """type"":""checkout"",""delta"":0,"
-                line = line & """patron_barcode"":""" & dgv.Rows(i).Cells(0).Value.ToString & ""","
-                line = line & """barcode"":""" & dgv.Rows(i).Cells(1).Value.ToString & ""","
-                '  line = line & """barcode"":""" & dgv.Rows(i).Cells(1).Value.ToString & ""","
-                Dim oDate = Convert.ToDateTime(dgv.Rows(i).Cells(2).Value.ToString)
-                Debug.Print(oDate.ToString("yyyy-MM-ddT" & "07" & ":mm:ssZ"))
-                Dim offset2 As TimeSpan = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow)
-                Dim offsethour = Mid(offset2.ToString, 2, 2)
+                    '  MsgBox(Form1.dgv.Rows(i).Cells(1).Value.ToString)
+                    line = "{" & Chr(34) & "timestamp" & Chr(34) & ":" & dgv.Rows(i).Cells(3).Value.ToString & ","
+                    line = line & """type"":""checkout"",""delta"":0,"
+                    line = line & """patron_barcode"":""" & dgv.Rows(i).Cells(0).Value.ToString & ""","
+                    line = line & """barcode"":""" & dgv.Rows(i).Cells(1).Value.ToString & ""","
+                    '  line = line & """barcode"":""" & dgv.Rows(i).Cells(1).Value.ToString & ""","
+                    Dim oDate = Convert.ToDateTime(dgv.Rows(i).Cells(2).Value.ToString)
+                    Debug.Print(oDate.ToString("yyyy-MM-ddT" & "07" & ":mm:ssZ"))
+                    Dim offset2 As TimeSpan = TimeZoneInfo.Local.GetUtcOffset(DateTime.UtcNow)
+                    Dim offsethour = Mid(offset2.ToString, 2, 2)
 
-                line = line & """due_date"":""" & oDate.ToString("yyyy-MM-ddT" & offsethour & ":mm:ssZ") & ""","
-                line = line & """checkout_time"":""" & dgv.Rows(i).Cells(4).Value.ToString & """}" & vbLf
+                    line = line & """due_date"":""" & oDate.ToString("yyyy-MM-ddT" & offsethour & ":mm:ssZ") & ""","
+                    line = line & """checkout_time"":""" & dgv.Rows(i).Cells(4).Value.ToString & """}" & vbLf
 
-                file.Write(line)
-
-
-                'MsgBox(line)
+                    file.Write(line)
 
 
+                    'MsgBox(line)
 
 
 
 
-            Next
-            file.Close()
-            ' statustext.text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePath
-            StatusText.Text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePath
-        End If
 
-        dgv.Sort(dgv.Columns(2), ListSortDirection.Ascending)
+
+                Next
+                file.Close()
+                ' statustext.text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePath
+                StatusText.Text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePath
+            End If
+
+            dgv.Sort(dgv.Columns(2), ListSortDirection.Ascending)
 
         If NoCard = True Then
+
             FilePathNoCard = My.Computer.FileSystem.SpecialDirectories.Desktop & "\OFFLINE_MANUAL_ENTRY_" & DateTime.Now.ToString("MMM-dd-yyyy") & ".txt"
-            Dim fileNoCard As System.IO.StreamWriter
-            fileNoCard = My.Computer.FileSystem.OpenTextFileWriter(FilePathNoCard, True)
-            line = "CKO Time:" & Date.Now.ToString & vbCrLf
-            line = line & "Patron: " & PatronName & vbCrLf
-            line = line & "DOB: " & PatronDOB & vbCrLf
-            line = line & "Phone: " & PatronPhone & vbCrLf
-            line = line & "Notes: " & Replace(PatronNotes, vbCrLf, " - ") & vbCrLf
-            fileNoCard.Write(line)
-            line = ""
-
-            For i = 0 To dgv.RowCount - 1
 
 
-                line = line & "Item: " & Replace(dgv.Rows(i).Cells(1).Value.ToString, vbTab, "") & vbCrLf
-                line = line & "Due Date: " & dgv.Rows(i).Cells(2).Value.ToString & vbCrLf
-
-
+                Dim fileNoCard As System.IO.StreamWriter
+                fileNoCard = My.Computer.FileSystem.OpenTextFileWriter(FilePathNoCard, True)
+                line = "CKO Time:" & Date.Now.ToString & vbCrLf
+                line = line & "Patron: " & PatronName & vbCrLf
+                line = line & "DOB: " & PatronDOB & vbCrLf
+                line = line & "Phone: " & PatronPhone & vbCrLf
+                line = line & "Notes: " & Replace(PatronNotes, vbCrLf, " - ") & vbCrLf
                 fileNoCard.Write(line)
                 line = ""
 
+                For i = 0 To dgv.RowCount - 1
 
 
-                'MsgBox(line)
+                    line = line & "Item: " & Replace(dgv.Rows(i).Cells(1).Value.ToString, vbTab, "") & vbCrLf
+                    line = line & "Due Date: " & dgv.Rows(i).Cells(2).Value.ToString & vbCrLf
+
+
+                    fileNoCard.Write(line)
+                    line = ""
+
+
+
+                    'MsgBox(line)
 
 
 
 
 
 
-            Next
-            fileNoCard.Write("-----------" & vbCrLf)
+                Next
+                fileNoCard.Write("-----------" & vbCrLf)
 
-            fileNoCard.Close()
-            StatusText.Text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePathNoCard
+                fileNoCard.Close()
+                StatusText.Text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePathNoCard
 
-        End If
+            End If
 
 
-        If chk_Print_Receipt.Checked And PrinterToUse <> "None" Then
+            If chk_Print_Receipt.Checked And PrinterToUse <> "None" Then
             Dim pd As New PrintDoc()
             pd.PrinterSettings.PrinterName = PrinterToUse
             pd.PrintController = New StandardPrintController
@@ -450,8 +456,17 @@ Public Class Form1
             Next
             PrintString = getBarcodeStr("") & vbCrLf
 
+            PrintString = "# of items: " & dgv.RowCount & vbCrLf
+            EPOSPrinter(PrintString)
+            PrintString = getBarcodeStr("") & vbCrLf
+            PrintString = DateTime.Now.ToString & vbCrLf
+
 
             EPOSPrinter(PrintString)
+            PrintString = getBarcodeStr("") & vbCrLf
+            EPOSPrinter(PrintString)
+
+
             StatusText.Text = "Last CKO " & DateTime.Now.ToString & "- saved to " & FilePathNoCard
 
         End If
@@ -462,12 +477,15 @@ Public Class Form1
         txt_item_barcode.Text = ""
         btn_Checkout.Enabled = False
         NoCard = False
+        btn_Save_Transactions.Enabled = False
 
         rdo28days.Checked = True
         PatronName = ""
         PatronDOB = ""
         PatronPhone = ""
         PatronNotes = ""
+
+
 
     End Sub
 
@@ -591,7 +609,13 @@ Public Class PrintDoc
 
 
         Next
-        printstr = vbCrLf & vbCrLf & DateTime.Now.ToString
+        printstr = "# of items: " & Form1.dgv.RowCount
+        yPos += e.Graphics.MeasureString(printstr, fnt).Height
+
+        e.Graphics.DrawString(printstr, fnt, Brushes.Black, 5, yPos)
+
+        printstr = vbCrLf & DateTime.Now.ToString
+        yPos += e.Graphics.MeasureString(printstr, fnt).Height
         e.Graphics.DrawString(printstr, fnt, Brushes.Black, 5, yPos)
         ' e.Graphics.DrawString("Hello, Printer!", fnt, Brushes.Black, 0, 0)
         fnt.Dispose()
